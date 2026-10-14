@@ -1,3 +1,13 @@
+/* Modulos para formularios y directivas de Angular */
+
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgOptimizedImage } from '@angular/common';
+/* =========================
+   Router
+   ========================= */
+import { RouterModule } from '@angular/router'
+
 /* Elementos de angular material */
 
 import { MatButtonModule } from '@angular/material/button';
@@ -15,6 +25,12 @@ import { MatIconModule } from '@angular/material/icon';
  */
 export const SHARED_IMPORTS = [
 
+  /* Angular */
+  CommonModule,
+  FormsModule,
+  ReactiveFormsModule,
+  RouterModule,
+  NgOptimizedImage,
   /* Angular Material */
   MatButtonModule,   // Permite usar botones estilizados de Angular Material (<button mat-button>, <button mat-raised-button>)
   MatDividerModule,  // Proporciona líneas divisorias estéticas (<mat-divider>)
