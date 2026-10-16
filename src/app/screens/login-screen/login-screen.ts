@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SHARED_IMPORTS } from '../../shared/shared.imports';
-import { NgClass } from '../../../../node_modules/@angular/common/common_module.d';
+import { NgClass } from '@angular/common';
 import { Router } from 'express';
 
 @Component({
@@ -43,6 +43,6 @@ export class LoginScreen implements OnInit {
 
   }
 
-  public olvidecontraseña() {
+  public olvidecontrasena() {
   }
 }
