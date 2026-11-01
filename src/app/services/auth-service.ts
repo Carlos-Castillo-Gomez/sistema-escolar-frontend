@@ -18,7 +18,7 @@ const role_name_cookie_name = 'sistema-escolar-role_name';
 })
 export class AuthService {
 
-  private cookieService = inject(CookieService)
+  private cookieService: CookieService = inject(CookieService);
   private http = inject(HttpClient);
   private router = inject(Router);
   private validatorService = inject(ValidatorService);
