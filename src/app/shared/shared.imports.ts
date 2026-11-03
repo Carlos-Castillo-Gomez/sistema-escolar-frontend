@@ -10,13 +10,24 @@ import { RouterModule } from '@angular/router'
 
 /* Elementos de angular material */
 
-import { MatButtonModule } from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatIconModule } from '@angular/material/icon';
+// Elementos de angular Material que se importan en los componentes standalone de la aplicación.
+
+import {MatButtonModule} from '@angular/material/button';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+
+/* =========================
+   ngx-mask (inputs de código)
+   ========================= */
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 /**
  * SHARED_IMPORTS
- * -------------------------------------------------------------------------
+ * ---------------------------------------------------------
  * Colección de módulos/directivas reutilizables en
  * componentes standalone.
  *
@@ -32,8 +43,14 @@ export const SHARED_IMPORTS = [
   RouterModule,
   NgOptimizedImage,
   /* Angular Material */
-  MatButtonModule,   // Permite usar botones estilizados de Angular Material (<button mat-button>, <button mat-raised-button>)
-  MatDividerModule,  // Proporciona líneas divisorias estéticas (<mat-divider>)
-  MatIconModule,     // Permite renderizar íconos de Material Icons (<mat-icon>)
-
+  MatButtonModule,
+  MatDividerModule,
+  MatIconModule,
+  MatCardModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatRadioModule,
+  /* ngx-mask */
+  NgxMaskDirective,
+  NgxMaskPipe
 ];
