@@ -1,14 +1,11 @@
-/* Modulos para formularios y directivas de Angular */
-
+// Módulos para formularios y directivas de Angular que se importan en los componentes standalone de la aplicación.
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgOptimizedImage } from '@angular/common';
 /* =========================
    Router
    ========================= */
-import { RouterModule } from '@angular/router'
-
-/* Elementos de angular material */
+import { RouterModule } from '@angular/router';
 
 // Elementos de angular Material que se importan en los componentes standalone de la aplicación.
 
@@ -35,7 +32,6 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
  * imports: [...SHARED_IMPORTS, HeaderApp, FooterApp]
  */
 export const SHARED_IMPORTS = [
-
   /* Angular */
   CommonModule,
   FormsModule,

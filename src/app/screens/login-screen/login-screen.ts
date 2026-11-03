@@ -1,48 +1,40 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SHARED_IMPORTS } from '../../shared/shared.imports';
-import { NgClass } from '@angular/common';
-import { Router } from 'express';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-screen',
-  imports: [
-    ...SHARED_IMPORTS,
-    NgClass
-],
+  imports: [...SHARED_IMPORTS],
   templateUrl: './login-screen.html',
   styleUrl: './login-screen.scss',
 })
 export class LoginScreen implements OnInit {
-
-  /* Inyeccion de dependencias   */
-
-  /* public router = inject(Router); */
-
-  /* Se definen las variables globales que se utilizaran en el componente */
+  //Se definen las variables globales que se utilizarán en el componente
   public username: string = '';
   public password: string = '';
   public load: boolean = false;
   public errors: any = {};
-  public typeInput: string = 'password';
 
-  constructor() { }
+  // Tipo de campo para la contraseña
+  public typeInput: 'password' | 'text' = 'password';
 
-  ngOnInit(): void {/* Esta funcion renderiza por primera vez */
+  //Definir el router para la navegación entre pantallas
+  private router: Router = inject(Router);
 
+  constructor() {}
 
-  }
+  ngOnInit(): void {}
 
-  public login() {
+  public login() {}
 
-  }
-
-  public showPassword() {
+  // Función para mostrar y ocultar la contraseña
+  showPassword(): void {
+    this.typeInput = this.typeInput === 'password' ? 'text' : 'password';
   }
 
   public registrar() {
-
+    this.router.navigate(['/registro-usuarios']);
   }
 
-  public olvidecontrasena() {
-  }
+  public olvideContrasena() {}
 }
