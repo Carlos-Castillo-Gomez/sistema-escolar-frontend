@@ -1,21 +1,33 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  provideBrowserGlobalErrorListeners,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-//Dependencia para el HTTP Client, que nos permite hacer peticiones HTTP a un servidor
+// Dependencia para el HTTP Client, que nos permite hacer peticiones HTTP a un servidor
 import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
-//Agregamos el masking para los inputs de los formularios
+// Agregamos el masking para los inputs de los formularios
 import { provideNgxMask } from 'ngx-mask';
+
+// Importamos el adaptador de fechas y la localización de Angular Material
+import { provideNativeDateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes), provideClientHydration(withEventReplay()),
+    provideRouter(routes),
+    provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()),
-    // Esta es la nueva forma de injectar el mask para que no le de errores
+    // Esta es la nueva forma de inyectar el mask para que no le de errores
     // al momento de crear los formularios
     provideNgxMask(),
-  ]
+
+    // Configuración global para el formato de fecha en español (DD/MM/AAAA)
+    provideNativeDateAdapter(),
+    { provide: MAT_DATE_LOCALE, useValue: 'es-MX' },
+  ],
 };
