@@ -4,6 +4,8 @@ import { AuthService } from './auth-service';
 import { ErrorsService } from './tools/errors-service';
 import { ValidatorService } from './tools/validator-service';
 import { DatosAlumno } from '../interfaces/usuarios.interfaces';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -108,5 +110,13 @@ export class AlumnosService {
     }
 
     return error;
+  }
+  // Metodo para registrar un nuevo alumno en la base de datos
+  // Creamos la funcion con la endpoint de la API y los datos del alumno a registrar
+  public registrarAlumno(data: DatosAlumno): Observable<any> {
+    // Llamada al endpoint de la API directamente en el return para registrar un nuevo alumno
+    return this.http.post<any>(`${environment.url_api}/alumnos/`, data, {
+      headers: this.getAuthHeaders(),
+    });
   }
 }

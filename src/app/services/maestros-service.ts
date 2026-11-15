@@ -3,6 +3,9 @@ import { inject, Injectable } from '@angular/core';
 import { AuthService } from './auth-service';
 import { ErrorsService } from './tools/errors-service';
 import { ValidatorService } from './tools/validator-service';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { DatosMaestro } from '../interfaces/usuarios.interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -127,5 +130,13 @@ export class MaestrosService {
     }
 
     return error;
+  }
+  // Metodo para registrar un nuevo maestro en la base de datos
+  // Creamos la funcion con la endpoint de la API y los datos del maestro a registrar
+  public registrarMaestro(data: DatosMaestro): Observable<any> {
+    // Llamada al endpoint de la API directamente en el return para registrar un nuevo maestro
+    return this.http.post<any>(`${environment.url_api}/maestros/`, data, {
+      headers: this.getAuthHeaders(),
+    });
   }
 }
