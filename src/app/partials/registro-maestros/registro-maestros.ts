@@ -32,6 +32,7 @@ export class RegistroMaestros implements OnInit {
   public hide_2: boolean = false;
   public inputType_1: string = 'password';
   public inputType_2: string = 'password';
+  notificationService: any;
 
   constructor() {}
 
@@ -91,7 +92,27 @@ export class RegistroMaestros implements OnInit {
       return;
     }
 
-    // TODO: Implementar lógica de envío a backend
+    //Validar que las contraseñas coincidan
+    if (this.maestro.password !== this.maestro.confirmar_password) {
+      this.errors['confirmar_password'] = 'Las contraseñas no coinciden';
+      this.notificationService.error('Las contraseñas no coinciden');
+      this.maestro.password = '';
+      this.maestro.confirmar_password = '';
+      return;
+    }
+
+    //Lógica para registrar o actualizar los datos del maestro
+    this.maestrosService.registrarMaestro(this.maestro).subscribe(
+      (response) => {
+        //Dentro del response se puede obtener el mensaje de éxito o error del backend, así como los datos del
+        console.log('Respuesta del backend:', response);
+        this.notificationService.success('Maestro registrado correctamente');
+        this.regresar();
+      }, (error) => {
+        console.error('Error al registrar el maestro:', error);
+        this.notificationService.error('Error al registrar el maestro');
+      }
+    )
   }
 
   public actualizar(): void {}

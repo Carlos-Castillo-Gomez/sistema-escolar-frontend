@@ -29,6 +29,7 @@ export class RegistroAlumnos implements OnInit {
   public hide_2: boolean = false;
   public inputType_1: string = 'password';
   public inputType_2: string = 'password';
+  notificationService: any;
 
   constructor() {}
 
@@ -70,7 +71,30 @@ export class RegistroAlumnos implements OnInit {
     if (Object.keys(this.errors).length > 0) {
       return;
     }
+    //Validar que las contraseñas coincidan
+    if (this.alumno.password !== this.alumno.confirmar_password) {
+      this.errors['confirmar_password'] = 'Las contraseñas no coinciden';
+      this.notificationService.error('Las contraseñas no coinciden');
+      this.alumno.password = '';
+      this.alumno.confirmar_password = '';
+      return;
+    }
+
+    //Lógica para registrar o actualizar los datos del alumno
+    this.alumnosService.registrarAlumno(this.alumno).subscribe(
+      (response) => {
+        //Dentro del response se puede obtener el mensaje de éxito o error del backend, así como los datos del
+        console.log('Respuesta del backend:', response);
+        this.notificationService.success('Alumno registrado correctamente');
+        this.regresar();
+      }, (error) => {
+        console.error('Error al registrar el alumno:', error);
+        this.notificationService.error('Error al registrar el alumno');
+      }
+    )
   }
+
+
 
   public actualizar(): void {}
 
