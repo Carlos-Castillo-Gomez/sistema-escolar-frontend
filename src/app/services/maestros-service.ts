@@ -43,7 +43,7 @@ export class MaestrosService {
     return {
       id: 0,
       rol: 'maestro',
-      clave_maestro: '', // ID de trabajador
+      id_trabajador: '', // ID de trabajador
       first_name: '',
       last_name: '',
       email: '',
@@ -62,8 +62,8 @@ export class MaestrosService {
     const error: any = {};
 
     // ID de trabajador
-    if (!this.validatorService.required(data['clave_maestro'])) {
-      error['clave_maestro'] = this.errorService.required;
+    if (!this.validatorService.required(data['id_trabajador'])) {
+      error['id_trabajador'] = this.errorService.required;
     }
 
     // Nombre y Apellidos

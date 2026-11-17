@@ -12,14 +12,14 @@
         <mat-label>ID de trabajador</mat-label>
         <input
           matInput
-          [(ngModel)]="maestro.clave_maestro"
-          name="id"
+          [(ngModel)]="maestro.id_trabajador"
+          name="id_trabajador"
           placeholder="Escribe ID de trabajador"
           [disabled]="editar"
         />
       </mat-form-field>
-      @if (errors.clave_maestro) {
-        <div class="invalid-feedback">{{ errors.clave_maestro }}</div>
+      @if (errors.id_trabajador) {
+        <div class="invalid-feedback">{{ errors.id_trabajador }}</div>
       }
 
       <!-- Nombre -->

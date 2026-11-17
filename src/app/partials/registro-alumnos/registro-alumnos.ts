@@ -4,6 +4,7 @@ import { SHARED_IMPORTS } from '../../shared/shared.imports';
 import { AlumnosService } from '../../services/alumnos-service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { NotificationService } from '../../services/tools/notification-service';
 
 @Component({
   selector: 'app-registro-alumnos',
@@ -17,8 +18,13 @@ export class RegistroAlumnos implements OnInit {
   @Input() rol: string = '';
   @Input() datos_user: any = {};
 
+
+  //Inyectar el servicio Location para poder regresar a la página anterior
   private location = inject(Location);
+  //Inyectar el servicio de administradores para poder registrar y actualizar los datos del administrador
   private alumnosService = inject(AlumnosService);
+  //Inyectar el servicio de notificaciones para mostrar mensajes al usuario
+  private notificationService = inject(NotificationService);
 
   public alumno: any = {};
   public errors: any = {};
@@ -29,7 +35,6 @@ export class RegistroAlumnos implements OnInit {
   public hide_2: boolean = false;
   public inputType_1: string = 'password';
   public inputType_2: string = 'password';
-  notificationService: any;
 
   constructor() {}
 
@@ -87,14 +92,13 @@ export class RegistroAlumnos implements OnInit {
         console.log('Respuesta del backend:', response);
         this.notificationService.success('Alumno registrado correctamente');
         this.regresar();
-      }, (error) => {
+      },
+      (error) => {
         console.error('Error al registrar el alumno:', error);
         this.notificationService.error('Error al registrar el alumno');
-      }
-    )
+      },
+    );
   }
-
-
 
   public actualizar(): void {}
 

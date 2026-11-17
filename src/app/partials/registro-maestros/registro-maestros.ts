@@ -5,6 +5,7 @@ import { MaestrosService } from '../../services/maestros-service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { NotificationService } from '../../services/tools/notification-service';
 
 @Component({
   selector: 'app-registro-maestros',
@@ -18,8 +19,12 @@ export class RegistroMaestros implements OnInit {
   @Input() rol: string = '';
   @Input() datos_user: any = {};
 
+  //Inyectar el servicio Location para poder regresar a la página anterior
   private location = inject(Location);
+  //Inyectar el servicio de administradores para poder registrar y actualizar los datos del administrador
   private maestrosService = inject(MaestrosService);
+  //Inyectar el servicio de notificaciones para mostrar mensajes al usuario
+  private notificationService = inject(NotificationService);
 
   public maestro: any = {};
   public errors: any = {};
@@ -32,7 +37,7 @@ export class RegistroMaestros implements OnInit {
   public hide_2: boolean = false;
   public inputType_1: string = 'password';
   public inputType_2: string = 'password';
-  notificationService: any;
+
 
   constructor() {}
 
@@ -108,11 +113,12 @@ export class RegistroMaestros implements OnInit {
         console.log('Respuesta del backend:', response);
         this.notificationService.success('Maestro registrado correctamente');
         this.regresar();
-      }, (error) => {
+      },
+      (error) => {
         console.error('Error al registrar el maestro:', error);
         this.notificationService.error('Error al registrar el maestro');
-      }
-    )
+      },
+    );
   }
 
   public actualizar(): void {}
