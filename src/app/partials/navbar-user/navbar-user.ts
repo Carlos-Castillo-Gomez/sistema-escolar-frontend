@@ -32,7 +32,7 @@ export class NavbarUser implements OnInit {
       '--text-main': '#e4ecfa',
       '--table-bg': '#222',
       '--table-header-bg': '#30507a',
-    },
+    }
   };
 
   private readonly authService = inject(AuthService);
@@ -67,7 +67,10 @@ export class NavbarUser implements OnInit {
   private applyPalette(mode: 'light' | 'dark'): void {
     const palette = this.colorPalettes[mode];
     Object.keys(palette).forEach((key) => {
-      document.documentElement.style.setProperty(key, palette[key as keyof typeof palette]);
+      document.documentElement.style.setProperty(
+        key,
+        palette[key as keyof typeof palette]
+      );
     });
     // Opcional: actualiza el atributo para selectores CSS [data-theme="dark"]
     document.documentElement.setAttribute('data-theme', mode);

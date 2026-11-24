@@ -15,5 +15,7 @@ export const publicGuard: CanActivateFn = () => {
    * - true permite acceder a la ruta pública.
    * - Se usa trim() para considerar inválido un token que solo tenga espacios.
    */
-  return token?.trim() ? router.createUrlTree(['/home']) : true;
+  return token?.trim()
+    ? router.createUrlTree(['/home'])
+    : true;
 };
