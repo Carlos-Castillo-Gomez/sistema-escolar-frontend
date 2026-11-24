@@ -49,7 +49,8 @@ export class LoginScreen implements OnInit {
       (response) => {
         //Si la respuesta es correcta, se procede a guardar los datos del usuario
         this.authService.saveUserData(response);
-        this.router.navigate(['app/home']);
+        console.log('Login exitoso. Datos del usuario guardados en cookies.');
+        this.router.navigate(['home']);
 
         this.load = false;
       }, (error) => {

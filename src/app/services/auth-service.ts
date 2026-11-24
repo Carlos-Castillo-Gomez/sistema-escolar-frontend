@@ -47,8 +47,6 @@ export class AuthService {
     return error;
   }
 
-
-
   //Definir la funcion para enviar la solicitud de login al servidor y majejar la respuesta
   public login(username: string, password: string) {
     const data = {
@@ -59,11 +57,13 @@ export class AuthService {
     return this.http.post<any>(`${environment.url_api}/login/`, data, jsonHeaders);
   }
 
-
   //Cerrar sesion
   public logout(): Observable<any> {
     const token = this.getSessionToken();
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Authorization: 'Bearer ' + token });
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token,
+    });
     return this.http.get<any>(`${environment.url_api}/logout/`, { headers });
   }
   // Funciones para manejar las cookies de sesión y autenticación del usuario
@@ -179,5 +179,39 @@ export class AuthService {
   // Funcion para obtener el rol del usuario
   public getUserRole() {
     return this.cookieService.get(role_name_cookie_name);
+  }
+
+  // ---- Role helpers (fuente única de verdad para toda la app) ----
+
+  isAdmin(): boolean {
+    return this.getUserRole() === 'administrador';
+  }
+
+  isTeacher(): boolean {
+    return this.getUserRole() === 'maestro';
+  }
+
+  isStudent(): boolean {
+    return this.getUserRole() === 'alumno';
+  }
+
+  canSeeAdminItems(): boolean {
+    return this.isAdmin();
+  }
+
+  canSeeTeacherItems(): boolean {
+    return this.isAdmin() || this.isTeacher();
+  }
+
+  canSeeStudentItems(): boolean {
+    return this.isAdmin() || this.isTeacher() || this.isStudent();
+  }
+
+  canSeeHomeItem(): boolean {
+    return this.isAdmin() || this.isTeacher();
+  }
+
+  canSeeRegisterItem(): boolean {
+    return this.isAdmin() || this.isTeacher();
   }
 }
