@@ -90,6 +90,10 @@ export class RegistroAdmin implements OnInit {
       return;
     }
 
+
+    // Asegurar que el rol se envie al backend
+    this.admin.rol = this.rol || 'administrador';
+
     //Lógica para registrar o actualizar los datos del administrador
     //Lógica para registrar o actualizar los datos del administrador
     this.administradoresService.registrarAdmin(this.admin).subscribe(

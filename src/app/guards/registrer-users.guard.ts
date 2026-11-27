@@ -1,6 +1,12 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { CanActivateFn, CanMatchFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth-service';
+
+// La ruta pública solo debe coincidir cuando no hay una sesión iniciada.
+export const publicRegisterMatch: CanMatchFn = () => {
+  const authService = inject(AuthService);
+  return !authService.getSessionToken()?.trim();
+};
 
 // Controla quién puede acceder al formulario de registro de usuarios.
 export const registerGuard: CanActivateFn = () => {

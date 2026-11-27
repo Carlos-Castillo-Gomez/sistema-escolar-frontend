@@ -46,4 +46,41 @@ export interface DatosAlumno {
   ocupacion: string;
 }
 
+export interface UsuarioApi {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+}
+
+export interface AdministradorApi {
+  id: number;
+  clave_admin: string;
+  rfc: string;
+  ocupacion: string;
+  user: Pick<UsuarioApi, 'first_name' | 'last_name' | 'email'>;
+}
+
+export interface AlumnoApi {
+  id: number;
+  matricula: number;
+  fecha_nacimiento: string;
+  curp: string;
+  rfc: string;
+  edad: number;
+  telefono: string;
+  ocupacion: string;
+  user: UsuarioApi;
+}
+
+export interface MaestroApi {
+  id: number;
+  id_trabajador: number;
+  fecha_nacimiento: string;
+  telefono: string;
+  rfc: string;
+  cubiculo: string;
+  area_investigacion: string | number;
+  user: UsuarioApi;
+}
 

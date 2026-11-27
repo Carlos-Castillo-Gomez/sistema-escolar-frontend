@@ -5,7 +5,7 @@ import { ErrorsService } from './tools/errors-service';
 import { ValidatorService } from './tools/validator-service';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { DatosMaestro } from '../interfaces/usuarios.interfaces';
+import { DatosMaestro, MaestroApi } from '../interfaces/usuarios.interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -54,7 +54,7 @@ export class MaestrosService {
       rfc: '',
       cubiculo: '',
       area_investigacion: '',
-      materias_json: [], // Aquí se guardarán las materias seleccionadas
+      materias_array: [], // Aquí se guardarán las materias seleccionadas
     };
   }
 
@@ -136,6 +136,14 @@ export class MaestrosService {
   public registrarMaestro(data: DatosMaestro): Observable<any> {
     // Llamada al endpoint de la API directamente en el return para registrar un nuevo maestro
     return this.http.post<any>(`${environment.url_api}/maestros/`, data, {
+      headers: this.getAuthHeaders(),
+    });
+  }
+
+  // Método para obtener la lista de maestros desde la base de datos
+  public obtenerListaMaestros(): Observable<MaestroApi[]> {
+    // Llamada al endpoint de la API directamente en el return para obtener la lista de maestros
+    return this.http.get<MaestroApi[]>(`${environment.url_api}/lista-maestros/`, {
       headers: this.getAuthHeaders(),
     });
   }

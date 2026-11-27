@@ -113,4 +113,10 @@ export class AdministradoresService {
     return this.http.post<any>(`${environment.url_api}/admin/`, data, {headers: this.getAuthHeaders()});
   }
 
+  // Metodo para obtener la lista de administradores desde la base de datos
+  public obtenerListaAdmins(): Observable <any> {
+    // Llamada al endpoint de la API directamente en el return para obtener la lista de administradores
+    return this.http.get<any>(`${environment.url_api}/lista-admins/`, {headers: this.getAuthHeaders()});
+  }
+
 }

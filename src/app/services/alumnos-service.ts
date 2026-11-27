@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { AuthService } from './auth-service';
 import { ErrorsService } from './tools/errors-service';
 import { ValidatorService } from './tools/validator-service';
-import { DatosAlumno } from '../interfaces/usuarios.interfaces';
+import { AlumnoApi, DatosAlumno } from '../interfaces/usuarios.interfaces';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -116,6 +116,12 @@ export class AlumnosService {
   public registrarAlumno(data: DatosAlumno): Observable<any> {
     // Llamada al endpoint de la API directamente en el return para registrar un nuevo alumno
     return this.http.post<any>(`${environment.url_api}/alumnos/`, data, {
+      headers: this.getAuthHeaders(),
+    });
+  }
+
+  public obtenerListaAlumnos(): Observable<AlumnoApi[]> {
+    return this.http.get<AlumnoApi[]>(`${environment.url_api}/lista-alumnos/`, {
       headers: this.getAuthHeaders(),
     });
   }
